@@ -1,16 +1,20 @@
 package myapp;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * MyAppController.
+ * @author Regis Humana.
+ */
 @Controller
 public class MyAppController {
-    
+    /**
+     * Index.
+     * @return string.
+     */
     @RequestMapping("/")
     public String index() {
         return "index.html";
     }
-    
 }
