@@ -14,7 +14,7 @@ pipeline {
         echo 'Unit Test'
         sh './sampleWebApp/gradlew test -p sampleWebApp'
         sh './sampleWebApp/gradlew myZip -p sampleWebApp'
-        archiveArtifacts 'sampleWebApp/result/*.zip'
+        archiveArtifacts './sampleWebApp/result/*.zip'
       }
     }
     stage('Check') {
@@ -35,7 +35,7 @@ pipeline {
   post {
     always {
       echo 'Sending the report to the client'
-      emailext attachmentsPattern: 'sampleWebApp/result/*.zip', body: 'The test has finished', subject: 'Project Test', to: 'regis_enrique@hotmail.com'
+      emailext attachmentsPattern: './sampleWebApp/result/*.zip', body: 'The test has finished', subject: 'Project Test', to: 'regis_enrique@hotmail.com'
     }
   }
 }
