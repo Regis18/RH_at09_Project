@@ -5,6 +5,9 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'checkstyle'
+    id 'findbugs'
+    id "org.sonarqube" version "2.7"
 }
 
 repositories {
@@ -34,4 +37,20 @@ publishing {
             from(components.java)
         }
     }
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
+
+task myZip(type: Zip) {
+   from '../sampleWebApp/build/reports'
+   include '*'
+   include '*/*' //to include contents of a folder present inside Reports directory
+   archiveName 'Reports.zip'
+   destinationDir(file('../sampleWebApp/result'))
 }

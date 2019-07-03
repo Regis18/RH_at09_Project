@@ -10,20 +10,37 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
+/**
+ * Application.
+ * @author Regis Humana.
+ */
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
-	
-	@Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+    /**
+     * Builder of Spring Application.
+     * @param application SpringApplicationBuilder.
+     * @return aplication sources.
+     */
+    @Override
+    protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
         return application.sources(Application.class);
     }
 
-    public static void main(String[] args) {
+    /**
+     * Main.
+     * @param args args.
+     */
+    public static void main(final String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
+    /**
+     * Command line runner.
+     * @param ctx ApplicationContext.
+     * @return args.
+     */
     @Bean
-    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+    public CommandLineRunner commandLineRunner(final ApplicationContext ctx) {
         return args -> {
 
             System.out.println("Let's inspect the beans provided by Spring Boot:");
