@@ -14,6 +14,12 @@ pipeline {
         echo 'Unit Test'
         sh './sampleWebApp/gradlew test -p sampleWebApp'
       }
+      post {
+        always{
+          junit "sampleWebApp/build/test-results/test/*.xml"
+          archiveArtifacts 'sampleWebApp/build/reports/tests/test/*'
+        }
+      }
     }
     stage('Check') {
       steps {
