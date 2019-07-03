@@ -13,14 +13,14 @@ pipeline {
       steps {
         echo 'Unit Test'
         sh './sampleWebApp/gradlew test -p sampleWebApp'
-        sh './sampleWebApp/gradlew myZip -p sampleWebApp'
-        archiveArtifacts 'sampleWebApp/result/*.zip'
       }
     }
     stage('Check') {
       steps {
         echo 'Checking'
         sh './sampleWebApp/gradlew check -p sampleWebApp'
+        sh './sampleWebApp/gradlew myZip -p sampleWebApp'
+        archiveArtifacts 'sampleWebApp/result/*.zip'
       }
     }
     stage('Sonarqube') {
@@ -33,8 +33,7 @@ pipeline {
   post {
     always {
       echo 'Sending the report to the client'
-      emailext(attachmentsPattern: 'sampleWebApp/result/*.zip', body: 'The test has finished', subject: 'Project Test', to: 'regis_enrique@hotmail.com')
-
+      emailext attachmentsPattern: 'sampleWebApp/result/Reports.zip', body: 'The test has finished', subject: 'Project Test', to: 'regis_enrique@hotmail.com'
     }
 
   }
