@@ -23,19 +23,18 @@ pipeline {
         sh './sampleWebApp/gradlew check -p sampleWebApp'
       }
     }
-
     stage('Sonarqube') {
       steps {
         echo 'Sonarqube'
         sh './sampleWebApp/gradlew sonarqube -p sampleWebApp'
       }
     }
-    
   }
   post {
     always {
       echo 'Sending the report to the client'
       emailext attachmentsPattern: './sampleWebApp/result/*.zip', body: 'The test has finished', subject: 'Project Test', to: 'regis_enrique@hotmail.com'
     }
+
   }
 }
