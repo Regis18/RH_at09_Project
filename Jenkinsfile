@@ -13,14 +13,14 @@ pipeline {
       steps {
         echo 'Unit Test'
         sh './sampleWebApp/gradlew test -p sampleWebApp'
-        sh './sampleWebApp/gradlew myZip -p sampleWebApp'
-        archiveArtifacts 'sampleWebApp/result/Reports.zip'
       }
     }
     stage('Check') {
       steps {
         echo 'Checking'
         sh './sampleWebApp/gradlew check -p sampleWebApp'
+        sh './sampleWebApp/gradlew myZip -p sampleWebApp'
+        archiveArtifacts 'sampleWebApp/result/*.zip'
       }
     }
     stage('Sonarqube') {
