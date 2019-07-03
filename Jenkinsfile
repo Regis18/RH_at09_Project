@@ -16,8 +16,8 @@ pipeline {
       }
       post {
         always{
-          junit "quickstart/build/test-results/test/*.xml"
-          archiveArtifacts 'quickstart/build/reports/tests/test/*'
+          junit "sampleWebApp/build/test-results/test/*.xml"
+          archiveArtifacts 'sampleWebApp/build/reports/tests/test/*'
         }
       }
     }
