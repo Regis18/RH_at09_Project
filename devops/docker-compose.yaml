@@ -1,0 +1,16 @@
+gocd_server:
+    image: "registry.jala.info/devops/gocd/gocd-server:v19.1.0"
+    ports:
+      - "8153:8153"
+      - "8154:8154"
+    volumes:
+      - /home/ubuntu/docker/godata_server:/godata
+      - /home/ubuntu/docker/go_server:/home/go
+
+  gocd_agent_alpine:
+    image: "registry.jala.info/devops/gocd/gocd-agent-alpine-3.8:v19.1.0"
+    environment:
+      - GO_SERVER_URL=https://gocd_server:8154/go
+    volumes:
+      - /home/ubuntu/docker/godata_agent:/godata
+      - /home/ubuntu/docker/go_agent:/home/go
